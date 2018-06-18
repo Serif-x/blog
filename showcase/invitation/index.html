@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <title>邀请函</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta itemprop="name" content="邀请函">
+  <meta itemprop="image" content="img/index_title.png">
+  <meta name="description" itemprop="description" content="上海市九江商会第二届理事大会 “浔融信 新格局”换届选举工作">
+  <meta name="author" content="Serifx">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+  <span class="meta" style="height: 0; width: 0; overflow: hidden; position: absolute;">
+    <img src="img/index_title.png" alt="">
+  </span>
+
+  <main class="view">
+    <section class="page page-index page-in" id="page-index">
+      <h1 class="index-title">邀请函</h1>
+    </section>
+
+    <section class="page page-content" id="page-content">
+      <div class="content-box">
+        <canvas id="content-canvas" data-img="img/content_box.png">
+      </div>
+    </section>
+  </main>
+
+  <script src="libs/zepto.min.js"></script>
+  <script src="libs/cryptojs/crypto-js.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    var evalWXjsApi = function (jsApiFun) {
+      if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        jsApiFun();
+      } else {
+        document.attachEvent && document.attachEvent("WeixinJSBridgeReady", jsApiFun);
+        document.addEventListener && document.addEventListener("WeixinJSBridgeReady", jsApiFun);
+      }
+    }
+  </script>
+</body>
+
+</html>
