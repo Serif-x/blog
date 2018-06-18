@@ -1,8 +1,0 @@
-node_modules/
-public/
-.idea/
-.deploy*/
-db.json
-
-.DS_Store
-Thumbs.db
