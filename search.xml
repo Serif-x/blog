@@ -4,6 +4,73 @@
   
     
     <entry>
+      <title><![CDATA[迟来的阶段大总结]]></title>
+      <url>//blog.tiy.xyz/posts/2018/1710259336/</url>
+      <content type="html"><![CDATA[<!-- 摘要 -->
+<p>项目都是经历，不以项目为目的，对各种参与的项目进行抽象总结，回顾历史，铭记错误，增强抵抗力。</p>
+<a id="more"></a>
+<h1><span id="迟来的阶段大总结">迟来的阶段大总结</span></h1>
+<h2><span id="序曲">序曲</span></h2>
+<p>时间过得太快，忙忙碌碌之后，让我不禁感叹，终于有心情闲下来，做一次全面的阶段总结。</p>
+<p>项目都是经历，不以项目为目的，以下对各种参与的项目进行抽象总结，回顾历史，铭记错误，增强抵抗力。时间不分先后。</p>
+<h2><span id="类型">类型</span></h2>
+<p>按照项目类型，不区分移动端和PC端，如下：</p>
+<ul>
+<li>商城</li>
+<li>微信小程序</li>
+<li>智能终端-混合应用（Hybrid APP）</li>
+<li>LED屏幕展示</li>
+<li>快递打印面单</li>
+<li>后台管理系统</li>
+</ul>
+<h2><span id="项目构建">项目构建</span></h2>
+<p>按照项目建立和开发的流程，主要包含如下：</p>
+<ul>
+<li>框架 + grunt + less</li>
+<li>框架 + gulp + babel + sass</li>
+<li>框架 + webpack + sass</li>
+<li>框架 + 插件 + gulp + 原生写法</li>
+<li>gulp + babel + sass</li>
+<li>webpack + sass</li>
+</ul>
+<h2><span id="框架库">框架/库</span></h2>
+<p>项目中使用到的库/框架，主要有：</p>
+<ul>
+<li>jQuery</li>
+<li><a href="//github.com/jquery/jquery-mobile">jQuery-Mobile</a></li>
+<li><a href="//github.com/jquery/jquery-ui">jQuery-UI</a></li>
+<li><a href="//www.bootcss.com/">Bootstrap</a></li>
+<li><a href="//github.com/amazeui/amazeui">Amaze-UI</a></li>
+<li><a href="//github.com/nolimits4web/Framework7">Framework7</a></li>
+<li><a href="//github.com/Tencent/weui">WeUI</a></li>
+<li><a href="//github.com/nuxt/nuxt.js">Nuxt</a></li>
+<li><a href="//github.com/vuejs/vue">Vue</a></li>
+<li><a href="//github.com/Tencent/wepy">WePy</a></li>
+</ul>
+<h2><span id="终章">终章</span></h2>
+<p>综合归类之后，看起来就很清晰了。看起来做了很多事情，但又好像什么也没做。</p>
+<p>工欲善其事必先利其器，项目中用到的工具很多，但更新换代也很快，伴随着一个个问题的解决，工具也会逐步被更新或替代。而语言也是一种工具。</p>
+<p>项目经历，增长的不应只是对工具的熟练应用能力，而是对解决问题需要用到的方法和工具的选择和掌控能力。</p>
+<p>很常见的一种现象是，引入一个工具，同时埋藏了若干后来才会发现的问题；终于又不得不引入另一个工具来解决这个问题，环环相扣。</p>
+<p>用工具解决问题并没错，关键在于，工具的选择以及使用方式是由我们决定的。我们需要解决的问题是，如何选择一个最合适的工具并以最干净的方式最快地解决问题。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 总结 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[CSS禅意花园示范作]]></title>
       <url>//blog.tiy.xyz/posts/2017/3721315630/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
@@ -447,9 +514,9 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
         
         <tags>
             
-            <tag> 代码段 </tag>
-            
             <tag> CSS </tag>
+            
+            <tag> 代码段 </tag>
             
         </tags>
         
