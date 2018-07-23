@@ -1,8 +1,6 @@
 # A Front-end Lover :heart:
 
-<a href="//blog.tiy.xyz/" target="_blank">
-  <img src="/assets/images/qrcode_subscribe.png" alt="微信号：Serifx" title="扫描二维码与我相识">
-</a>  
+[![微信号：Serifx](https://raw.githubusercontent.com/Serif-x/blog/gh-pages/assets/images/qrcode_subscribe.png "扫描二维码与我相识")](//blog.tiy.xyz/)
 
 ## ✎ 个人简介
 
