@@ -4,8 +4,307 @@
   
     
     <entry>
+      <title><![CDATA[JavaScript 语言精粹：原型与继承]]></title>
+      <url>https://blog.tiy.xyz/posts/2018/1809288136/</url>
+      <content type="html"><![CDATA[<!-- 摘要 -->
+<a id="more"></a>
+<h2><span id="原型链">原型链</span></h2>
+<p><img src="js-prototype.png" alt="JavaScript 原型链"></p>
+<p>JavaScript 原型链</p>
+<blockquote>
+<p>基本上所有函数都含有 <code>prototype</code> 原型属性，除了 <code>Function.prototype.bind()</code> 方法<strong>生成的</strong>函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="built_in">Function</span>.prototype.bind()</span><br><span class="line"><span class="keyword">typeof</span> foo <span class="comment">// -&gt; "function"</span></span><br><span class="line">foo.prototype === <span class="literal">undefined</span> <span class="comment">// -&gt; true</span></span><br></pre></td></tr></table></figure>
+<h2><span id="new-过程">new 过程</span></h2>
+<ol>
+<li>
+<p>新建空对象 <code>{}</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>设置对象 <code>constructor</code> 属性为构造函数，根据引擎环境设置原型属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.__proto__ = Fn.prototype</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用新对象调用函数构造器，上下文 <code>this</code> 被指向该对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fn.call(obj)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>返回新对象（引用地址）。</p>
+<p>注意：若构造函数最终返回值类型为基本数据类型（<code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>），则 <code>new</code> 之后返回刚刚创建的实例对象；若构造函数返回值类型为引用类型，则返回这个引用值</p>
+</li>
+</ol>
+<h2><span id="functionproto-functionprototype">Function.<strong>proto</strong> === Function.prototype</span></h2>
+<p>如图：</p>
+<p><img src="js-prototype-1.jpg" alt="Function.prototype"></p>
+<p>解析：</p>
+<ul>
+<li><code>Object.prototype</code> 由引擎创建，不是由 <code>Object()</code> 函数创建。所有实例都是对象，但是对象不一定都是实例。</li>
+<li><code>Function.prototype</code> 也由引擎创建。首先引擎创建了 <code>Object.prototype</code> ，然后创建了 <code>Function.prototype</code> ，并且通过 <code>__proto__</code> 将两者联系了起来</li>
+<li>不是所有函数都是 <code>new Function()</code> 产生的。有了 Function.prototype 以后才有了 function Function() ，然后其他的构造函数都是 function Function() 生成的。</li>
+</ul>
+<p><img src="js-prototype-2.jpg" alt="Function.prototype"></p>
+<h2><span id="参考资料">[参考资料]</span></h2>
+<ul>
+<li><a href="https://github.com/KieSun/Blog/issues/2" target="_blank" rel="noopener">深度解析原型中的各个难点</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JavaScript 语言精粹：类型转换]]></title>
+      <url>https://blog.tiy.xyz/posts/2018/1778481141/</url>
+      <content type="html"><![CDATA[<!-- 摘要 -->
+<p>JavaScript 期望使用一个比如布尔值的时候，会对数值进行转换，真值会被当成 true，假值会被当成 false。其他情况，JavaScript 引擎会根据上下文需要对其进行必要的转换</p>
+<a id="more"></a>
+<h2><span id="类型转换">类型转换</span></h2>
+<p>表：JavaScript 类型转换</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>转换为：字符串</th>
+<th>数字</th>
+<th>布尔值</th>
+<th>对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>undefined</td>
+<td>&quot;undefined&quot;</td>
+<td>NaN</td>
+<td>false</td>
+<td>throws TypeError</td>
+</tr>
+<tr>
+<td>null</td>
+<td>&quot;null&quot;</td>
+<td><strong>0</strong></td>
+<td>false</td>
+<td>throws TypeError</td>
+</tr>
+<tr>
+<td>true</td>
+<td>&quot;true&quot;</td>
+<td><strong>1</strong></td>
+<td></td>
+<td>new Boolean(true)</td>
+</tr>
+<tr>
+<td>false</td>
+<td>&quot;false&quot;</td>
+<td><strong>0</strong></td>
+<td></td>
+<td>new Boolean(false)</td>
+</tr>
+<tr>
+<td>&quot;&quot;（空字符串）</td>
+<td></td>
+<td><strong>0</strong></td>
+<td>false</td>
+<td>new String(&quot;&quot;)</td>
+</tr>
+<tr>
+<td>&quot;1.2&quot;（非空，数字）</td>
+<td></td>
+<td>1.2</td>
+<td>true</td>
+<td>new String(&quot;1.2&quot;)</td>
+</tr>
+<tr>
+<td>&quot;one&quot;（非空，非数字）</td>
+<td></td>
+<td>NaN</td>
+<td>true</td>
+<td>new String(&quot;one&quot;)</td>
+</tr>
+<tr>
+<td>0</td>
+<td>&quot;0&quot;</td>
+<td></td>
+<td>false</td>
+<td>new Number(0)</td>
+</tr>
+<tr>
+<td>-0</td>
+<td>&quot;0&quot;</td>
+<td></td>
+<td>false</td>
+<td>new Number(-0)</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>&quot;NaN&quot;</td>
+<td></td>
+<td>false</td>
+<td>new Number(NaN)</td>
+</tr>
+<tr>
+<td>Infinity</td>
+<td>&quot;Infinity&quot;</td>
+<td></td>
+<td>true</td>
+<td>new Number(Infinity)</td>
+</tr>
+<tr>
+<td>-Infinity</td>
+<td>&quot;-Infinity&quot;</td>
+<td></td>
+<td>true</td>
+<td>new Number(-Infinity)</td>
+</tr>
+<tr>
+<td>1（无穷大，非零）</td>
+<td>&quot;1&quot;</td>
+<td></td>
+<td>true</td>
+<td>new Number(1)</td>
+</tr>
+<tr>
+<td>{}（任意对象）</td>
+<td></td>
+<td></td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>[]（任意数组）</td>
+<td><strong>&quot;&quot;</strong></td>
+<td><strong>0</strong></td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>[9]（1个数字对象）</td>
+<td>&quot;9&quot;</td>
+<td><strong>9</strong></td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>['a']（其他数组）</td>
+<td>使用 join() 方法</td>
+<td>NaN</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>function(){}（任意函数）</td>
+<td></td>
+<td>NaN</td>
+<td>true</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2><span id="是非真假值判断">是非（真假值）判断</span></h2>
+<p>任意 JavaScript 的值都可以转换为布尔值。以下值会被转换为 <code>false</code> ：</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>0</code></li>
+<li><code>-0</code></li>
+<li><code>NaN</code></li>
+<li><code>&quot;&quot;</code> // 空字符串</li>
+</ul>
+<p>所有其他值，包括所有对象（数组）都会被转换成 <code>true</code></p>
+<h2><span id="相等比较">相等比较</span></h2>
+<p>相等比较包含隐式转换逻辑，比较运算 <code>x==y</code>, 其中 <code>x</code> 和 <code>y</code> 是值，产生 <code>true</code> 或者 <code>false</code>。这样的比较按如下方式进行：</p>
+<ol>
+<li>
+<p>若 <code>Type(x)</code> 与 <code>Type(y)</code> 相同， 则</p>
+<ol>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Undefined</code>（同为 <code>Undefined</code>）， 返回 <code>true</code>。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Null</code>（同为 <code>Null</code>）， 返回 <code>true</code>。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Number</code>， 则</p>
+<ol>
+<li>若 <code>x</code> 为 <code>NaN</code>， 返回 <code>false</code>。</li>
+<li>若 <code>y</code> 为 <code>NaN</code>， 返回 <code>false</code>。</li>
+<li>若 <code>x</code> 与 <code>y</code> 为相等数值， 返回 <code>true</code>。</li>
+<li>若 <code>x</code> 为 <code>+0</code> 且 <code>y</code> 为 <code>−0</code>， 返回 <code>true</code>。</li>
+<li>若 <code>x</code> 为 <code>−0</code> 且 <code>y</code> 为 <code>+0</code>， 返回 <code>true</code>。</li>
+<li>返回 <code>false</code>。</li>
+</ol>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>String</code>, 则当 <code>x</code> 和 <code>y</code> 为完全相同的字符序列（长度相等且相同字符在相同位置）时返回 <code>true</code>。 否则， 返回 <code>false</code>。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Boolean</code>, 当 <code>x</code> 和 <code>y</code> 为同为 <code>true</code> 或者同为 <code>false</code> 时返回 <code>true</code>。 否则， 返回 <code>false</code>。</p>
+</li>
+<li>
+<p>当 <code>x</code> 和 <code>y</code> 为引用同一对象时返回 <code>true</code>。否则，返回 <code>false</code>。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>若 <code>x</code> 为 <code>null</code> 且 <code>y</code> 为 <code>undefined</code>， 返回 <code>true</code>。</p>
+</li>
+<li>
+<p>若 <code>x</code> 为 <code>undefined</code> 且 <code>y</code> 为 <code>null</code>， 返回 <code>true</code>。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Number</code> 且 <code>Type(y)</code> 为 <code>String</code>， 返回比较 <code>x == ToNumber(y)</code> 的结果。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>String</code> 且 <code>Type(y)</code> 为 <code>Number</code>，返回比较 <code>ToNumber(x) == y</code> 的结果。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>Boolean</code>， 返回比较 <code>ToNumber(x) == y</code> 的结果。</p>
+</li>
+<li>
+<p>若 <code>Type(y)</code> 为 <code>Boolean</code>， 返回比较 <code>x == ToNumber(y)</code> 的结果。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 <code>String</code> 或 <code>Number</code>，且 <code>Type(y)</code> 为 <code>Object</code>，返回比较 <code>x == ToPrimitive(y)</code> 的结果。</p>
+</li>
+<li>
+<p>若 <code>Type(x)</code> 为 Object 且 <code>Type(y)</code> 为 <code>String</code> 或 <code>Number</code>， 返回比较 <code>ToPrimitive(x) == y</code> 的结果。</p>
+</li>
+<li>
+<p>返回 <code>false</code>。</p>
+</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[迟来的阶段大总结]]></title>
-      <url>//blog.tiy.xyz/posts/2018/1710259336/</url>
+      <url>https://blog.tiy.xyz/posts/2018/1710259336/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>项目都是经历，不以项目为目的，对各种参与的项目进行抽象总结，回顾历史，铭记错误，增强抵抗力。</p>
 <a id="more"></a>
@@ -71,7 +370,7 @@
     
     <entry>
       <title><![CDATA[CSS禅意花园示范作]]></title>
-      <url>//blog.tiy.xyz/posts/2017/3721315630/</url>
+      <url>https://blog.tiy.xyz/posts/2017/3721315630/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>CSS禅意花园初试，仅供学习，欢迎交流（文末有链接哦）</p>
 <a id="more"></a>
@@ -120,7 +419,7 @@
     
     <entry>
       <title><![CDATA[JavaScript知识点]]></title>
-      <url>//blog.tiy.xyz/posts/2016/3711766572/</url>
+      <url>https://blog.tiy.xyz/posts/2016/3711766572/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>JavaScript知识点</p>
 <a id="more"></a>
@@ -235,7 +534,7 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 这个特性绝对不要使用，因为它在内部使用了 eval。</p>
 </blockquote>
 <h2><span id="参考">参考</span></h2>
-<p><a href="//developer.mozilla.org/zh-CN/docs/Web/JavaScript">MDN</a><br>
+<p><a href="//developer.mozilla.org/zh-CN/docs/Web/JavaScript">MDN</a>
 <a href="//bonsaiden.github.io/JavaScript-Garden/zh">JavaScript 秘密花园</a></p>
 ]]></content>
       
@@ -248,9 +547,9 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
         
         <tags>
             
-            <tag> JavaScript </tag>
-            
             <tag> 知识点 </tag>
+            
+            <tag> JavaScript </tag>
             
         </tags>
         
@@ -258,14 +557,14 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
     
     <entry>
       <title><![CDATA[JavaScript编码习惯和技巧]]></title>
-      <url>//blog.tiy.xyz/posts/2016/1104843291/</url>
+      <url>https://blog.tiy.xyz/posts/2016/1104843291/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>JavaScript编码习惯和技巧</p>
 <a id="more"></a>
 <h2><span id="运用-和ampamp运算符">运用 || 和&amp;&amp;运算符</span></h2>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">10</span>;</span><br><span class="line">foo == <span class="number">10</span> &amp;&amp; doSomething(); <span class="comment">// is the same thing as if (foo == 10) doSomething();</span></span><br><span class="line">foo == <span class="number">5</span> || doSomething(); <span class="comment">// is the same thing as if (foo != 5) doSomething();</span></span><br></pre></td></tr></table></figure>
 <h2><span id="运用-运算符">运用 | 运算符</span></h2>
-<p>在js整数操作的时候，相当于去除小数点（取整），parseInt。在正数的时候相当于Math.floor()，负数的时候相当于Math.ceil()<br>
+<p>在js整数操作的时候，相当于去除小数点（取整），parseInt。在正数的时候相当于Math.floor()，负数的时候相当于Math.ceil()
 <em>[<a href="//www.haorooms.com/post/js_dsg_ysf">REF</a>]</em></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil()  用作向上取整。</span><br><span class="line"><span class="built_in">Math</span>.floor() 用作向下取整。</span><br><span class="line"><span class="built_in">Math</span>.round() 我们数学中常用到的四舍五入取整。</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0.6</span>|<span class="number">0</span>)<span class="comment">//0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1.1</span>|<span class="number">0</span>)<span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3.65555</span>|<span class="number">0</span>)<span class="comment">//3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5.99999</span>|<span class="number">0</span>)<span class="comment">//5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">-7.777</span>|<span class="number">0</span>)<span class="comment">//-7</span></span><br></pre></td></tr></table></figure>
 <p>同理有：</p>
@@ -374,10 +673,10 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 <h2><span id="禁止别人以iframe加载你的页面">禁止别人以iframe加载你的页面</span></h2>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.location != <span class="built_in">window</span>.parent.location) <span class="built_in">window</span>.parent.location = <span class="built_in">window</span>.location;</span><br></pre></td></tr></table></figure>
 <h2><span id="参考">参考</span></h2>
-<p><a href="//modernweb.com/2013/12/23/45-useful-javascript-tips-tricks-and-best-practices/">45 useful javascript tips tricks and best practices</a><br>
-<a href="//github.com/oneuijs/You-Dont-Need-jQuery">You Don't Need jQuery</a><br>
-<a href="//bonsaiden.github.io/JavaScript-Garden/zh">JavaScript 秘密花园</a><br>
-<a href="//segmentfault.com/a/1190000002753931">盘点JavaScript里好用的原生API ꒰･◡･๑꒱</a><br>
+<p><a href="//modernweb.com/2013/12/23/45-useful-javascript-tips-tricks-and-best-practices/">45 useful javascript tips tricks and best practices</a>
+<a href="//github.com/oneuijs/You-Dont-Need-jQuery">You Don't Need jQuery</a>
+<a href="//bonsaiden.github.io/JavaScript-Garden/zh">JavaScript 秘密花园</a>
+<a href="//segmentfault.com/a/1190000002753931">盘点JavaScript里好用的原生API ꒰･◡･๑꒱</a>
 <a href="//segmentfault.com/a/1190000002911253">关于原生js的一些研究</a></p>
 ]]></content>
       
@@ -400,7 +699,7 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
     
     <entry>
       <title><![CDATA[JavaScript代码注释规范与示例]]></title>
-      <url>//blog.tiy.xyz/posts/2016/1640409887/</url>
+      <url>https://blog.tiy.xyz/posts/2016/1640409887/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>JavaScript代码注释规范与示例</p>
 <a id="more"></a>
@@ -415,7 +714,7 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 <p>总是在单行注释符后留一个空格。例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this is comment</span></span><br></pre></td></tr></table></figure>
 <p>总是在多行注释的结束符前留一个空格（使星号对齐）。例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 <p>不要把注释写在多行注释的开始符、结束符所在行。例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* start</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">end */</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  here is line 1</span></span><br><span class="line"><span class="comment">  here is line 2</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
@@ -447,11 +746,11 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 <p>@property 声明类属性及说明，用法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @property &#123;属性类型&#125; 属性名 属性描述</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 <h2><span id="其他文档注释">其他文档注释</span></h2>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@author 指示代码的作者 </span><br><span class="line">@deprecated 指示一个函数已经废弃，而且在将来的代码版本中将彻底删除。要避免使用这段代码</span><br><span class="line">@version 指定发布版本</span><br><span class="line">@alias 函数或变量的别名</span><br><span class="line">@throws @exception 描述函数可能抛出的异常的类型</span><br><span class="line">@description 代码提示时显示被描述变量或者函数的描述信息</span><br><span class="line">@private 指示一个类或函数是私有的。私有类和函数不会出现在HTML文档中，除非运行JSDoc时提供了 --private 命令行选项</span><br><span class="line">@example 提示代码示例</span><br><span class="line">@extends &#123;type&#125; 标识继承于某个类型</span><br><span class="line">@type &#123;Type[,Type,...]&#125; 定义某个变量的类型</span><br><span class="line">@ignore JsDoc忽略有这个标记的函数</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@author 指示代码的作者</span><br><span class="line">@deprecated 指示一个函数已经废弃，而且在将来的代码版本中将彻底删除。要避免使用这段代码</span><br><span class="line">@version 指定发布版本</span><br><span class="line">@alias 函数或变量的别名</span><br><span class="line">@throws @exception 描述函数可能抛出的异常的类型</span><br><span class="line">@description 代码提示时显示被描述变量或者函数的描述信息</span><br><span class="line">@private 指示一个类或函数是私有的。私有类和函数不会出现在HTML文档中，除非运行JSDoc时提供了 --private 命令行选项</span><br><span class="line">@example 提示代码示例</span><br><span class="line">@extends &#123;type&#125; 标识继承于某个类型</span><br><span class="line">@type &#123;Type[,Type,...]&#125; 定义某个变量的类型</span><br><span class="line">@ignore JsDoc忽略有这个标记的函数</span><br></pre></td></tr></table></figure>
 <h2><span id="参考">参考</span></h2>
 <p>js/javascript代码注释规范与示例（原文链接失踪了）
-<a href="https://code.google.com/p/jsdoc-toolkit/w/list" target="_blank" rel="noopener">jsdoc-toolkit</a><br>
-<a href="http://usejsdoc.org/" target="_blank" rel="noopener">@use JSDoc</a><br>
+<a href="https://code.google.com/p/jsdoc-toolkit/w/list" target="_blank" rel="noopener">jsdoc-toolkit</a>
+<a href="http://usejsdoc.org/" target="_blank" rel="noopener">@use JSDoc</a>
 <a href="http://ask.dcloud.net.cn/article/129" target="_blank" rel="noopener">JSDoc+规范</a></p>
 ]]></content>
       
@@ -474,7 +773,7 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
     
     <entry>
       <title><![CDATA[CSS编码习惯和技巧]]></title>
-      <url>//blog.tiy.xyz/posts/2016/2680227017/</url>
+      <url>https://blog.tiy.xyz/posts/2016/2680227017/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
 <p>CSS编码习惯和技巧，常用CSS代码段</p>
 <a id="more"></a>
@@ -487,7 +786,7 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 <h2><span id="为默认链接添加样式如通过cms系统添加的链接">为默认链接添加样式（如通过CMS系统添加的链接）</span></h2>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href]</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[class]</span>) &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#008000</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2><span id="使用-box-sizing-属性可以使用通配符通配符效率低是误区">使用 box-sizing 属性，可以使用通配符（通配符效率低是误区）</span></h2>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*, </span><br><span class="line">*<span class="selector-pseudo">:before</span>, </span><br><span class="line">*<span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-box-sizing</span>: border-box;</span><br><span class="line">       <span class="attribute">-moz-box-sizing</span>: border-box;</span><br><span class="line">            <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*,</span><br><span class="line">*<span class="selector-pseudo">:before</span>,</span><br><span class="line">*<span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-box-sizing</span>: border-box;</span><br><span class="line">       <span class="attribute">-moz-box-sizing</span>: border-box;</span><br><span class="line">            <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="//i.wanz.im/2012/01/03/performance_testing_about_css_universal_selector/">关于css通配符性能问题不完全测试</a></p>
 <h2><span id="不要在选择器末尾使用-通用选择器">不要在选择器末尾使用 * 通用选择器。</span></h2>
 <p>CSS 选择器匹配规则是从右往左，例如：</p>
@@ -495,12 +794,12 @@ for in 总是要遍历整个原型链，因此如果一个对象的继承层次�
 <h2><span id="块级元素右对齐">块级元素右对齐</span></h2>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.block-right</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: auto;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2><span id="让overflowauto页面滚动条出现时不跳动">让overflow:auto页面滚动条出现时不跳动</span></h2>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">1150px</span>) &#123; <span class="comment">/* for大屏幕 */</span>   </span><br><span class="line"><span class="selector-class">.wrap-outer</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="built_in">calc</span>(100vw - 100%);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">1150px</span>) &#123; <span class="comment">/* for大屏幕 */</span></span><br><span class="line"><span class="selector-class">.wrap-outer</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="built_in">calc</span>(100vw - 100%);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="//www.zhangxinxu.com/wordpress/2015/01/css-page-scrollbar-toggle-center-no-jumping/">让overflow:auto页面滚动条出现时不跳动</a></p>
 <h2><span id="参考">参考</span></h2>
-<p><a href="//github.com/AllThingsSmitty/css-protips">CSS Protips</a><br>
-<a href="//github.com/cssdream/css-creating">CSS 创作指南</a><br>
-<a href="//shawphy.com/2010/11/css-universal-selector.html">CSS通用元素选择器的都市流言</a><br>
+<p><a href="//github.com/AllThingsSmitty/css-protips">CSS Protips</a>
+<a href="//github.com/cssdream/css-creating">CSS 创作指南</a>
+<a href="//shawphy.com/2010/11/css-universal-selector.html">CSS通用元素选择器的都市流言</a>
 <a href="//i.wanz.im/2012/01/03/performance_testing_about_css_universal_selector/">关于css通配符性能问题不完全测试</a></p>
 ]]></content>
       

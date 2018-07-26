@@ -2,23 +2,23 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>//blog.tiy.xyz/post-sitemap.xml</loc>
-        <lastmod>2018-07-23T11:11:42.980Z</lastmod>
+        <loc>https://blog.tiy.xyz/post-sitemap.xml</loc>
+        <lastmod>2018-07-26T15:19:45.657Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>//blog.tiy.xyz/page-sitemap.xml</loc>
+        <loc>https://blog.tiy.xyz/page-sitemap.xml</loc>
         <lastmod>2018-07-23T10:17:43.266Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>//blog.tiy.xyz/category-sitemap.xml</loc>
-        <lastmod>2017-04-08T02:24:33.213Z</lastmod>
+        <loc>https://blog.tiy.xyz/category-sitemap.xml</loc>
+        <lastmod>2018-07-23T15:00:58.354Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>//blog.tiy.xyz/tag-sitemap.xml</loc>
-        <lastmod>2017-04-08T02:24:33.210Z</lastmod>
+        <loc>https://blog.tiy.xyz/tag-sitemap.xml</loc>
+        <lastmod>2018-07-23T15:00:58.354Z</lastmod>
     </sitemap>
 
 </sitemapindex>
