@@ -7,6 +7,30 @@
     </url>
 
     <url>
+        <loc>https://blog.tiy.xyz/posts/2018/3141220995/</loc>
+        <lastmod>2018-07-27T16:02:24.651Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.tiy.xyz/posts/2018/3526440553/</loc>
+        <lastmod>2018-07-27T15:51:24.349Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.tiy.xyz/posts/2018/1809288136/</loc>
+        <lastmod>2018-07-27T14:58:09.823Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://blog.tiy.xyz/posts/2018/2255145150/</loc>
         <lastmod>2018-07-27T13:51:52.983Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -23,7 +47,7 @@
     </url>
 
     <url>
-        <loc>https://blog.tiy.xyz/posts/2016/3711766572/</loc>
+        <loc>https://blog.tiy.xyz/posts/2016/1104843291/</loc>
         <lastmod>2018-07-26T15:19:45.654Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +55,7 @@
     </url>
 
     <url>
-        <loc>https://blog.tiy.xyz/posts/2016/1104843291/</loc>
+        <loc>https://blog.tiy.xyz/posts/2016/3711766572/</loc>
         <lastmod>2018-07-26T15:19:45.654Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -41,14 +65,6 @@
     <url>
         <loc>https://blog.tiy.xyz/posts/2017/3721315630/</loc>
         <lastmod>2018-07-26T15:19:45.650Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://blog.tiy.xyz/posts/2018/1809288136/</loc>
-        <lastmod>2018-07-26T15:17:16.295Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
