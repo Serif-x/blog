@@ -603,13 +603,14 @@ CSS 语法分析转换</p>
     </entry>
     
     <entry>
-      <title><![CDATA[ECMAScript6 语法关键点]]></title>
+      <title><![CDATA[ECMAScript 6 语法关键点]]></title>
       <url>https://blog.tiy.xyz/posts/2018/3526440553/</url>
       <content type="html"><![CDATA[<!-- 摘要 -->
-<p>通过阅读阮一峰老师著作《ECMAScript 6 入门》，提取和总结的 ECMAScript6 语法关键点</p>
+<p>通过阅读阮一峰老师著作《ECMAScript 6 入门》，提取和总结的 ECMAScript6 语法关键点。取一些需要注意的地方，供学习和参考。</p>
 <a id="more"></a>
 <h2><span id="目录">目录</span></h2>
 <ul>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
 <li><a href="#%E2%9C%8E-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E">✎ 变量声明</a>
 <ul>
 <li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
